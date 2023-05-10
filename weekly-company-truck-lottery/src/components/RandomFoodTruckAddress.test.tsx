@@ -31,9 +31,9 @@ describe("RandomFoodTruckAddress", () => {
     ).toBeInTheDocument();
   });
 
-  // After writing the code to complete the test I am hesitant here to leave this test here. I dont love deeply nested mocks when testing hooks. I would consider the following
-  // 1.  Would we be reusing the refreh state in other components? If so, I would consider moving the refresh state to its own module and testing that hook in isolation. But at that point we would essentially be testing a single state hook from react and I would consider that overkill.
-  // 2.  If we are not reusing the refresh state in other components, I would consider removing the refresh state from the hook and just using a callback to refresh the address. This would allow us to test the hook in isolation and the component in isolation. but reading the instructions I think its fine to leave this test here and comment it out to show where I was thinking.
+  // This code presents a dilemma regarding the test for the hook with deeply nested mocks. Here are some suggestions to enhance our approach:
+  // 1. If the refresh state will be utilized across multiple components, consider extracting it into a separate module. Testing this hook independently may seem excessive since it relies on React's single state hook, but it ensures reusability.
+  // 2. If the refresh state remains exclusives to this component, contemplate removing it from the hook and implementing a callback for address refresh. This strategy enables isolated testing for both the hook and the component. For now, this test will be commented out, providing insight into our thought process.
 
   // it('refreshes the address on button click', () => {
   //   const mockRefresh = jest.fn();
