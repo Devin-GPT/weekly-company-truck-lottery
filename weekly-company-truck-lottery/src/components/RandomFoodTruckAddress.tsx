@@ -2,6 +2,7 @@ import React from "react";
 import useRandomFoodTruckAddress from "../hooks/useRandomFoodTruckAddress";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
@@ -19,10 +20,11 @@ function Copyright() {
   );
 }
 const RandomFoodTruckAddress: React.FC = () => {
-  const [address, loading] = useRandomFoodTruckAddress();
+  const [address, loading, setRefresh] = useRandomFoodTruckAddress();
+  
 
   if (loading) {
-    return <Loader/>
+    return <div data-testid="loading-spinner"><Loader/></div> 
   }
 
   return (
@@ -43,6 +45,8 @@ const RandomFoodTruckAddress: React.FC = () => {
         }}>
           {address && address}
         </Typography>
+        <Button onClick={() => setRefresh(curr => !curr)} >Refresh Please for Allergy</Button>
+
       </Container>
       <Box
         component="footer"

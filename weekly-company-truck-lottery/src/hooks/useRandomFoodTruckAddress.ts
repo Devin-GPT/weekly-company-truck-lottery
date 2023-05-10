@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import axios from 'axios';
 
 interface FoodTruck {
@@ -6,9 +6,10 @@ interface FoodTruck {
   // Add other properties if needed
 }
 
-const useRandomFoodTruckAddress = (): [string | null, boolean] => {
+const useRandomFoodTruckAddress = (): [string | null, boolean, Dispatch<SetStateAction<boolean>>] => {
   const [address, setAddress] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [refresh, setRefresh] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,9 +28,9 @@ const useRandomFoodTruckAddress = (): [string | null, boolean] => {
     };
 
     fetchData();
-  }, []);
+  }, [refresh]);
 
-  return [address, loading];
+  return [address, loading, setRefresh];
 };
 
 export default useRandomFoodTruckAddress;
